@@ -43,9 +43,18 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-import { posts } from "./posts/postRoute.js";
+import { initializeDatabase } from "./mongo_db/database.js";
 
-app.use("/posts", posts);
+import { postRoutes } from "./posts/postRoute.js";
+import { userAuthRoutes } from "./users/userRoute.js";
+
+
+initializeDatabase();
+
+app.use(postRoutes);
+app.use(userAuthRoutes);
+
+
 
 // Listening to incoming requests
 app.listen(port, () => console.log(`Server's up. Listening on port ${port}`));
