@@ -32,10 +32,12 @@ export default function Home() {
   }, []);
 
   /* handlers */
-  const handleDelete = (id) => {
+  const handleDelete = (e, id) => {
+    e.stopPropagation();
     deletePost(id);
   };
-  const handleEdit = (post) => {
+  const handleEdit = (e, post) => {
+    e.stopPropagation();
     navigate("/update-post", { replace: true, state: { postToUpdate: post } });
   };
   const handlePostClick = (post, user) => {
@@ -78,8 +80,8 @@ export default function Home() {
 
                   {user === post.user._id && (
                     <>
-                      <Button onClick={() => handleEdit(post)}>Edit</Button>
-                      <Button onClick={() => handleDelete(post._id)}>
+                      <Button onClick={(e) => handleEdit(e, post)}>Edit</Button>
+                      <Button onClick={(e) => handleDelete(e, post._id)}>
                         Delete
                       </Button>
                     </>

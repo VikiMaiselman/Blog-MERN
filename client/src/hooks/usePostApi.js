@@ -11,7 +11,6 @@ export default function usePostApi() {
     try {
       const response = await axios.get(url, { withCredentials: true }, headers);
       const postsInDB = response.data;
-      console.log("FETCHING POSTS", response.data, postsInDB);
       setPosts(postsInDB);
       return postsInDB;
     } catch (err) {}
