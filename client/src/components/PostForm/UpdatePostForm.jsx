@@ -1,21 +1,24 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import usePostApi from "../../hooks/usePostApi";
 import { AuthContext } from "../../contexts/Auth.context";
 
-export default function NewPostForm() {
-  /* navigation */
+export default function UpdatePostForm() {
+  /* location & navigation */
   const navigate = useNavigate();
+  const location = useLocation();
+  const { postToUpdate } = location.state;
 
   /* context */
   const { isAuthenticated } = React.useContext(AuthContext);
 
   /* hooks */
-  const [posts, fetchPosts, createPost] = usePostApi();
+  const [, , , updatePost] = usePostApi();
   const [post, setPost] = React.useState({
-    title: "",
-    content: "",
-    author: "",
+    ...postToUpdate,
+    title: postToUpdate.title,
+    content: postToUpdate.content,
+    author: postToUpdate.author,
   });
 
   /* handlers */
@@ -28,8 +31,9 @@ export default function NewPostForm() {
     setPost(updatePostState);
   };
   const handleClick = (e) => {
+    console.log(post);
     e.preventDefault();
-    createPost(post);
+    updatePost(post);
     setPost({
       title: "",
       content: "",
@@ -41,7 +45,7 @@ export default function NewPostForm() {
   return (
     isAuthenticated && (
       <div class="container">
-        <h1>NEW POST</h1>
+        <h1>Update post</h1>
 
         <form id="newPostForm" method="post" action="/api/posts">
           <input
@@ -69,7 +73,7 @@ export default function NewPostForm() {
             required
           ></input>
           <button class="full-width" type="submit" onClick={handleClick}>
-            Create
+            Save
           </button>
         </form>
       </div>

@@ -17,9 +17,9 @@ export default function usePostApi() {
     } catch (err) {}
   };
 
-  React.useEffect(() => {
-    fetchPosts();
-  }, []);
+  //   React.useEffect(() => {
+  //     fetchPosts();
+  //   }, []);
 
   const createPost = async (post) => {
     console.log("CREATING POST", post);
