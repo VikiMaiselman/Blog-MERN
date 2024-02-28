@@ -12,6 +12,7 @@ export const getPosts = async (req, res) => {
 export const createPost = async (req, res) => {
   const { title, author, content } = req.body.newPost;
   const creationDate = new Date();
+  console.log(req.user);
 
   const newPost = new Post({
     title: title,
