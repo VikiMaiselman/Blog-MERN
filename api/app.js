@@ -14,7 +14,7 @@ const port = 3008;
 // CORS (development stage only)
 app.use(
   cors({
-    origin: "http://localhost:3000", // allow to server to accept request from different origin
+    origin: "http://localhost:5173", // allow to server to accept request from different origin
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true, // allow session cookie from browser to pass through
   })
@@ -48,13 +48,10 @@ import { initializeDatabase } from "./mongo_db/database.js";
 import { postRoutes } from "./posts/postRoute.js";
 import { userAuthRoutes } from "./users/userRoute.js";
 
-
 initializeDatabase();
 
-app.use(postRoutes);
 app.use(userAuthRoutes);
-
-
+app.use(postRoutes);
 
 // Listening to incoming requests
 app.listen(port, () => console.log(`Server's up. Listening on port ${port}`));

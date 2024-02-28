@@ -1,14 +1,16 @@
 import express from "express";
 const router = express.Router();
 
-import { Post } from "../mongo_db/database.js";
+import {
+  getPosts,
+  createPost,
+  updatePost,
+  deletePost,
+} from "./postController.js";
 
-router.get("/", async (req, res) => {
-  try {
-    const res = await Post.findOne({ user: req.user });
-    console.log(req.user);
-  } catch (err) {}
-  res.send("<h1>Let us start</h1>");
-});
+router.get("/", getPosts);
+router.post("/", createPost);
+router.patch("/update-post", updatePost);
+router.post("/delete-post", deletePost);
 
 export { router as postRoutes };

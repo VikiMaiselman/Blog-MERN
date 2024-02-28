@@ -32,7 +32,7 @@ async function initializeDatabase() {
         creationDate: {
           type: Date,
         },
-        user: [UserSchema]
+        user: UserSchema
     });
   
     const PostSchema = new mongoose.Schema({
@@ -52,7 +52,7 @@ async function initializeDatabase() {
         type: Date,
       },
       comments: [CommentSchema],
-      user: [UserSchema]
+      user: UserSchema
     });
   
     /* create mongodb models */
