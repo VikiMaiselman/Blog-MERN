@@ -20,21 +20,6 @@ async function initializeDatabase() {
     password: String,
   });
 
-  const CommentSchema = new mongoose.Schema({
-    content: {
-      type: String,
-      required: true,
-    },
-    author: {
-      type: String,
-      required: true,
-    },
-    creationDate: {
-      type: Date,
-    },
-    user: UserSchema,
-  });
-
   const PostSchema = new mongoose.Schema({
     title: {
       type: String,
@@ -51,7 +36,25 @@ async function initializeDatabase() {
     creationDate: {
       type: Date,
     },
-    comments: [CommentSchema],
+    user: UserSchema,
+  });
+
+  const CommentSchema = new mongoose.Schema({
+    content: {
+      type: String,
+      required: true,
+    },
+    author: {
+      type: String,
+      required: true,
+    },
+    creationDate: {
+      type: Date,
+    },
+    post: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Post",
+    },
     user: UserSchema,
   });
 

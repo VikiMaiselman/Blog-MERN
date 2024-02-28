@@ -6,7 +6,6 @@ import cors from "cors";
 
 import session from "express-session";
 import passport from "passport";
-import passportLocalMongoose from "passport-local-mongoose";
 
 const app = express();
 const port = 3008;
@@ -43,15 +42,17 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-import { initializeDatabase } from "./mongo_db/database.js";
+import { initializeDatabase } from "./adb_mongo/database.js";
 
 import { postRoutes } from "./posts/postRoute.js";
+import { commentRoutes } from "./comments/commentRoute.js";
 import { userAuthRoutes } from "./users/userRoute.js";
 
 initializeDatabase();
 
 app.use(userAuthRoutes);
 app.use(postRoutes);
+app.use("/comment", commentRoutes);
 
 // Listening to incoming requests
 app.listen(port, () => console.log(`Server's up. Listening on port ${port}`));

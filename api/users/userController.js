@@ -1,5 +1,5 @@
 import passport from "passport";
-import { User } from "../mongo_db/database.js";
+import { User } from "../adb_mongo/database.js";
 
 export const register = async (req, res) => {
   const username = req.body.username;
