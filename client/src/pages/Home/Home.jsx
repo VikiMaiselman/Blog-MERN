@@ -6,7 +6,14 @@ import { Button } from "@mui/material";
 
 import usePostApi from "../../hooks/usePostApi";
 import { AuthContext } from "../../contexts/Auth.context";
-import { StyledContainer, StyledTitle } from "./StyledHome";
+import {
+  StyledContainer,
+  SectionHeading,
+  StyledTitle,
+  ArticleFooter,
+  Author,
+  CustomDate,
+} from "./StyledHome";
 
 export default function Home() {
   /* navigation */
@@ -46,7 +53,10 @@ export default function Home() {
 
   return (
     <div>
-      <h1>My Blog</h1>
+      <SectionHeading>
+        <h1>My Blog</h1>
+      </SectionHeading>
+
       {isAuthenticated && (
         <Link to="/newpost">
           {/* <SavingsOutlinedIcon sx={{ fontSize: "1rem", verticalAlign: "-2px" }} /> */}
@@ -66,32 +76,47 @@ export default function Home() {
               return (
                 <StyledContainer onClick={() => handlePostClick(post, user)}>
                   <StyledTitle>{post.title}</StyledTitle>
-                  <small>written by {post.author}</small>
                   <p>{post.content}</p>
-                  <small>
-                    {new Date(post.creationDate).toLocaleDateString(undefined, {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                  </small>
 
-                  {user === post.user._id && (
-                    <>
-                      <Button onClick={(e) => handleEdit(e, post)}>Edit</Button>
-                      <Button onClick={(e) => handleDelete(e, post._id)}>
-                        Delete
-                      </Button>
-                    </>
-                  )}
-                  <a class="edit" href="/edit/<%= post.id %>">
-                    Edit
-                  </a>
-                  {/* <a class="delete" href="/api/posts/delete/<%= post.id %>">
-                    Delete
-                  </a> */}
+                  <ArticleFooter>
+                    <div>
+                      <Author>{post.author}</Author>
+                      <CustomDate>
+                        {new Date(post.creationDate).toLocaleDateString(
+                          undefined,
+                          {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          }
+                        )}
+                      </CustomDate>
+                    </div>
+                    {user?.id === post.user._id && (
+                      <div>
+                        <Button
+                          onClick={(e) => handleEdit(e, post)}
+                          color="success"
+                          fontSize="small"
+                          variant="outlined"
+                          sx={{ margin: "0 5px" }}
+                        >
+                          Edit
+                        </Button>
+                        <Button
+                          onClick={(e) => handleDelete(e, post._id)}
+                          color="secondary"
+                          fontSize="small"
+                          variant="outlined"
+                          sx={{ margin: "0 5px" }}
+                        >
+                          Delete
+                        </Button>
+                      </div>
+                    )}
+                  </ArticleFooter>
                 </StyledContainer>
               );
             })

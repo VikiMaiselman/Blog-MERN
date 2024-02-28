@@ -1,12 +1,10 @@
 import * as React from "react";
-import { TextareaAutosize } from "@mui/base/TextareaAutosize";
 
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import useCommentApi from "../../../hooks/useCommentApi";
 
@@ -38,7 +36,7 @@ export default function CreateCommentDialog({ author, id, hasSubmitted }) {
   return (
     <React.Fragment>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Add Comment
+        Click here to leave a reply
       </Button>
       <Dialog
         fullWidth
@@ -48,20 +46,12 @@ export default function CreateCommentDialog({ author, id, hasSubmitted }) {
           component: "form",
           onSubmit: (event) => {
             event.preventDefault();
-            const formData = new FormData(event.currentTarget);
-            const formJson = Object.fromEntries(formData.entries());
-            const email = formJson.email;
-            console.log(email);
             handleClose();
           },
         }}
       >
         <DialogTitle>Add Comment</DialogTitle>
         <DialogContent>
-          {/* <DialogContentText>
-            To subscribe to this website, please enter your email address here.
-            We will send updates occasionally.
-          </DialogContentText> */}
           <TextField
             autoFocus
             required
@@ -72,6 +62,8 @@ export default function CreateCommentDialog({ author, id, hasSubmitted }) {
             value={content}
             onChange={handleChange}
             fullWidth
+            multiline
+            maxRows={25}
             variant="standard"
           />
         </DialogContent>

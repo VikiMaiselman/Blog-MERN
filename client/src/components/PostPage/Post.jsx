@@ -9,6 +9,17 @@ import { AuthContext } from "../../contexts/Auth.context";
 import usePostApi from "../../hooks/usePostApi";
 import useCommentApi from "../../hooks/useCommentApi";
 
+import {
+  StyledContainer,
+  ScrolledContainer,
+  TextContent,
+  ArticleFooter,
+  Author,
+  CustomDate,
+  StyledHeader,
+  LiveCommentContainer,
+} from "./StyledPost";
+
 export default function Post() {
   /* location & navigation */
   const navigate = useNavigate();
@@ -21,7 +32,7 @@ export default function Post() {
   const [hasSubmittedComment, setHasSubmittedComment] = React.useState(false);
   const [, , , , deletePost] = usePostApi();
   const [comments, fetchComments] = useCommentApi();
-  console.log("Page of Post rerenders");
+  console.log(user);
 
   React.useEffect(() => {
     fetchComments(post._id);
@@ -36,51 +47,79 @@ export default function Post() {
     navigate("/update-post", { replace: true, state: { postToUpdate: post } });
   };
 
-  const handleAddComment = () => {};
   const handleUpdateComment = () => {};
   const handleDeleteComment = () => {};
 
   return (
-    <div>
-      <h1>{post.title}</h1>
-      <small>written by {post.author}</small>
-      <p>{post.content}</p>
-      <small>
-        {new Date(post.creationDate).toLocaleDateString(undefined, {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-        })}
-      </small>
-      {user === post.user._id && (
-        <>
-          <Button onClick={() => handleEditPost(post)}>Edit</Button>
-          <Button onClick={() => handleDeletePost(post._id)}>Delete</Button>
-        </>
-      )}
-      <h2>Comments:</h2>
-      {comments &&
-        React.Children.toArray(
-          comments.map((comment) => {
-            return <Comment comment={comment} />;
-          })
-        )}
-      {isAuthenticated && (
-        <CreateCommentDialog
-          author={post.author}
-          id={post._id}
-          hasSubmitted={setHasSubmittedComment}
-        />
-      )}
+    <StyledContainer>
+      <ScrolledContainer>
+        <h1>{post.title}</h1>
+        <TextContent>{post.content}</TextContent>
+        <ArticleFooter>
+          <div>
+            <Author>{post.author}</Author>
+            <CustomDate>
+              {new Date(post.creationDate).toLocaleDateString(undefined, {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </CustomDate>
+          </div>
 
-      {/* {user === post.user._id && (
-        <>
-          <Button onClick={() => handleEdit(post)}>Edit</Button>
-          <Button onClick={() => handleDelete(post._id)}>Delete</Button>
-        </>
-      )} */}
-    </div>
+          {user.id === post.user._id && (
+            <div>
+              <Button
+                onClick={() => handleEditPost(post)}
+                color="success"
+                fontSize="small"
+                variant="outlined"
+                sx={{ margin: "0 5px" }}
+              >
+                Edit Post
+              </Button>
+              <Button
+                onClick={() => handleDeletePost(post._id)}
+                color="secondary"
+                fontSize="small"
+                variant="outlined"
+                sx={{ margin: "0 5px" }}
+              >
+                Delete Post
+              </Button>
+            </div>
+          )}
+        </ArticleFooter>
+
+        {comments?.length !== 0 && <StyledHeader>Comments:</StyledHeader>}
+        {comments &&
+          React.Children.toArray(
+            comments.map((comment) => {
+              return (
+                <Comment
+                  comment={comment}
+                  writtenByThisUser={user.id === post.user._id}
+                />
+              );
+            })
+          )}
+        {isAuthenticated && (
+          <LiveCommentContainer>
+            <StyledHeader>Leave a reply:</StyledHeader>
+            <p>
+              Let us know what you think. Share your thoughts with others and
+              take part in positive conversation.
+            </p>
+            <CreateCommentDialog
+              author={user.username}
+              id={post._id}
+              hasSubmitted={setHasSubmittedComment}
+            />
+          </LiveCommentContainer>
+        )}
+      </ScrolledContainer>
+    </StyledContainer>
   );
 }

@@ -34,7 +34,6 @@ export default function AuthProvider({ children }) {
         { withCredentials: true },
         headers
       );
-      console.log(response);
       return response.data;
     } catch (err) {
       console.error(err);
