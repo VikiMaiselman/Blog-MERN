@@ -10,9 +10,14 @@ import ReorderTwoToneIcon from "@mui/icons-material/ReorderTwoTone";
 import LogoutSharpIcon from "@mui/icons-material/LogoutSharp";
 import AccountBalanceSharpIcon from "@mui/icons-material/AccountBalanceSharp";
 
+import {
+  StyledNavContainer,
+  StyledRegularLink,
+  StyledLastNavLink,
+} from "./StyledNavbar";
+
 export default function Navbar() {
   const { isAuthenticated } = React.useContext(AuthContext);
-  console.log(isAuthenticated);
   const [isFixed, setIsFixed] = useState(false);
 
   const defineIfFixed = () => setIsFixed(window.scrollY >= 50);
@@ -23,41 +28,51 @@ export default function Navbar() {
   }, []);
 
   return (
-    <ul className={isFixed ? "Navbar scroll" : "Navbar"}>
-      <li className="Navbar-component">
+    <StyledNavContainer>
+      <StyledRegularLink className="Navbar-component">
         <Link to="/">
           <AccountBalanceSharpIcon
             sx={{ fontSize: "1rem", verticalAlign: "-2px" }}
           />
           &nbsp;Posts
         </Link>
-      </li>
+      </StyledRegularLink>
       {isAuthenticated && (
-        <li className="Navbar-component">
-          <Link to="/about">
-            <SavingsOutlinedIcon
-              sx={{ fontSize: "1rem", verticalAlign: "-2px" }}
-            />
-            &nbsp;About Author
-          </Link>
-        </li>
+        <>
+          <StyledRegularLink className="Navbar-component">
+            <Link to="/about">
+              <SavingsOutlinedIcon
+                sx={{ fontSize: "1rem", verticalAlign: "-2px" }}
+              />
+              &nbsp;About Author
+            </Link>
+          </StyledRegularLink>
+          <StyledRegularLink className="Navbar-component">
+            <Link to="/newpost">
+              <SavingsOutlinedIcon
+                sx={{ fontSize: "1rem", verticalAlign: "-2px" }}
+              />
+              &nbsp;Create Post
+            </Link>
+          </StyledRegularLink>
+          <StyledLastNavLink className="Navbar-component">
+            <Link to="/logout">
+              <LogoutSharpIcon
+                sx={{ fontSize: "1rem", verticalAlign: "-2px" }}
+              />
+              &nbsp;Logout
+            </Link>
+          </StyledLastNavLink>
+        </>
       )}
       {!isAuthenticated && (
-        <li className="Navbar-component">
+        <StyledLastNavLink className="Navbar-component">
           <Link to="/authenticate">
             <LogoutSharpIcon sx={{ fontSize: "1rem", verticalAlign: "-2px" }} />
             &nbsp;Sign Up / Log In
           </Link>
-        </li>
+        </StyledLastNavLink>
       )}
-      {isAuthenticated && (
-        <li className="Navbar-component">
-          <Link to="/logout">
-            <LogoutSharpIcon sx={{ fontSize: "1rem", verticalAlign: "-2px" }} />
-            &nbsp;Logout
-          </Link>
-        </li>
-      )}
-    </ul>
+    </StyledNavContainer>
   );
 }

@@ -27,6 +27,26 @@ export default function AuthProvider({ children }) {
     getAuthStatus();
   }, [isAuthenticated]);
 
+  const getUser = async () => {
+    try {
+      const response = await axios.get(
+        `${url}/get-user`,
+        { withCredentials: true },
+        headers
+      );
+      console.log(response);
+      return response.data;
+    } catch (err) {
+      console.error(err);
+      Swal.fire({
+        title: "Ooops!",
+        text: err.response.data.message,
+        icon: "error",
+      });
+      return null;
+    }
+  };
+
   const login = async (user) => {
     try {
       const response = await axios.post(
@@ -80,7 +100,9 @@ export default function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, register, logout }}>
+    <AuthContext.Provider
+      value={{ isAuthenticated, getUser, login, register, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );
