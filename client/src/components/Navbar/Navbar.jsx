@@ -35,7 +35,7 @@ export default function Navbar() {
           height={"400"}
           style={{ objectFit: "cover" }}
         />
-        <NavbarImageTitle>Viki Blog...</NavbarImageTitle>
+        <NavbarImageTitle>Viki's Blog...</NavbarImageTitle>
       </div>
       <StyledNavContainer>
         <StyledRegularLink className="Navbar-component">
