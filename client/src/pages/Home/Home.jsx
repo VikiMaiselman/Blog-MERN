@@ -13,6 +13,7 @@ import {
   ArticleFooter,
   Author,
   CustomDate,
+  StyledParagraph,
 } from "./StyledHome";
 
 export default function Home() {
@@ -54,13 +55,15 @@ export default function Home() {
   return (
     <div>
       <SectionHeading>
-        <h1>My Blog</h1>
+        <h1>See What's New</h1>
       </SectionHeading>
 
       {isAuthenticated && (
         <Link to="/newpost">
           {/* <SavingsOutlinedIcon sx={{ fontSize: "1rem", verticalAlign: "-2px" }} /> */}
-          &nbsp;Create New Post
+          <Button color="secondary" fontSize="small" sx={{ margin: "0 5px" }}>
+            &nbsp;Create New Post
+          </Button>
         </Link>
       )}
 
@@ -68,15 +71,10 @@ export default function Home() {
         {posts &&
           React.Children.toArray(
             sortedPosts.map((post) => {
-              {
-                {
-                  /* console.log("INDIVIDUAL POST", post); */
-                }
-              }
               return (
                 <StyledContainer onClick={() => handlePostClick(post, user)}>
                   <StyledTitle>{post.title}</StyledTitle>
-                  <p>{post.content}</p>
+                  <StyledParagraph>{post.content}</StyledParagraph>
 
                   <ArticleFooter>
                     <div>

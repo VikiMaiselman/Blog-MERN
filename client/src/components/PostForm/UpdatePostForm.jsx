@@ -1,7 +1,11 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Button, TextField } from "@mui/material";
+
 import usePostApi from "../../hooks/usePostApi";
 import { AuthContext } from "../../contexts/Auth.context";
+
+import { StyledContainer, StyledPostForm } from "./StyledPostForm";
 
 export default function UpdatePostForm() {
   /* location & navigation */
@@ -44,39 +48,50 @@ export default function UpdatePostForm() {
 
   return (
     isAuthenticated && (
-      <div class="container">
+      <StyledContainer>
         <h1>Update post</h1>
 
-        <form id="newPostForm" method="post" action="/api/posts">
-          <input
+        <StyledPostForm>
+          <TextField
             type="text"
             name="title"
             value={post.title}
             onChange={handleChange}
             placeholder="Title"
+            fullWidth
             required
-          ></input>
-          <textarea
+          />
+          <TextField
             name="content"
             value={post.content}
             onChange={handleChange}
             placeholder="Content"
             required
-            rows="10"
-          ></textarea>
-          <input
+            fullWidth
+            multiline
+            rows={16}
+          />
+          <TextField
             type="text"
             name="author"
             value={post.author}
             onChange={handleChange}
             placeholder="Author"
+            fullWidth
             required
-          ></input>
-          <button class="full-width" type="submit" onClick={handleClick}>
+          />
+          <Button
+            type="submit"
+            onClick={handleClick}
+            color="secondary"
+            fontSize="small"
+            variant="contained"
+            sx={{ margin: "0 5px" }}
+          >
             Save
-          </button>
-        </form>
-      </div>
+          </Button>
+        </StyledPostForm>
+      </StyledContainer>
     )
   );
 }

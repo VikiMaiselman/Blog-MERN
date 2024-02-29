@@ -28,51 +28,74 @@ export default function Navbar() {
   }, []);
 
   return (
-    <StyledNavContainer>
-      <StyledRegularLink className="Navbar-component">
-        <Link to="/">
-          <AccountBalanceSharpIcon
-            sx={{ fontSize: "1rem", verticalAlign: "-2px" }}
-          />
-          &nbsp;Posts
-        </Link>
-      </StyledRegularLink>
-      {isAuthenticated && (
-        <>
-          <StyledRegularLink className="Navbar-component">
-            <Link to="/about">
-              <SavingsOutlinedIcon
-                sx={{ fontSize: "1rem", verticalAlign: "-2px" }}
-              />
-              &nbsp;About Author
-            </Link>
-          </StyledRegularLink>
-          <StyledRegularLink className="Navbar-component">
-            <Link to="/newpost">
-              <SavingsOutlinedIcon
-                sx={{ fontSize: "1rem", verticalAlign: "-2px" }}
-              />
-              &nbsp;Create Post
-            </Link>
-          </StyledRegularLink>
+    <>
+      <div>
+        <img
+          src="winter-park.jpg"
+          width={"100%"}
+          height={"400"}
+          style={{ objectFit: "cover" }}
+        />
+        <h1
+          style={{
+            position: "absolute",
+            top: "15%",
+            left: "38%",
+            fontFamily: "cursive",
+            fontSize: "5rem",
+          }}
+        >
+          Viki Blog...
+        </h1>
+      </div>
+      <StyledNavContainer>
+        <StyledRegularLink className="Navbar-component">
+          <Link to="/">
+            <AccountBalanceSharpIcon
+              sx={{ fontSize: "1rem", verticalAlign: "-2px" }}
+            />
+            &nbsp;Posts
+          </Link>
+        </StyledRegularLink>
+        {isAuthenticated && (
+          <>
+            <StyledRegularLink className="Navbar-component">
+              <Link to="/about">
+                <SavingsOutlinedIcon
+                  sx={{ fontSize: "1rem", verticalAlign: "-2px" }}
+                />
+                &nbsp;About Author
+              </Link>
+            </StyledRegularLink>
+            <StyledRegularLink className="Navbar-component">
+              <Link to="/newpost">
+                <SavingsOutlinedIcon
+                  sx={{ fontSize: "1rem", verticalAlign: "-2px" }}
+                />
+                &nbsp;Create Post
+              </Link>
+            </StyledRegularLink>
+            <StyledLastNavLink className="Navbar-component">
+              <Link to="/logout">
+                <LogoutSharpIcon
+                  sx={{ fontSize: "1rem", verticalAlign: "-2px" }}
+                />
+                &nbsp;Logout
+              </Link>
+            </StyledLastNavLink>
+          </>
+        )}
+        {!isAuthenticated && (
           <StyledLastNavLink className="Navbar-component">
-            <Link to="/logout">
+            <Link to="/authenticate">
               <LogoutSharpIcon
                 sx={{ fontSize: "1rem", verticalAlign: "-2px" }}
               />
-              &nbsp;Logout
+              &nbsp;Sign Up / Log In
             </Link>
           </StyledLastNavLink>
-        </>
-      )}
-      {!isAuthenticated && (
-        <StyledLastNavLink className="Navbar-component">
-          <Link to="/authenticate">
-            <LogoutSharpIcon sx={{ fontSize: "1rem", verticalAlign: "-2px" }} />
-            &nbsp;Sign Up / Log In
-          </Link>
-        </StyledLastNavLink>
-      )}
-    </StyledNavContainer>
+        )}
+      </StyledNavContainer>
+    </>
   );
 }

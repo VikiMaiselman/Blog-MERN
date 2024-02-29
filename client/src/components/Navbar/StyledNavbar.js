@@ -3,11 +3,12 @@ import { styled } from "@mui/system";
 export const StyledNavContainer = styled("div")({
   listStyleType: "none",
   overflow: "hidden",
-  backgroundColor: "#444",
+  backgroundColor: "#161008",
   color: "#fff",
   position: " fixed",
   top: "0",
   width: "100%",
+  marginTop: "-6px",
 });
 
 const StyledNavLink = styled("li")({
@@ -31,23 +32,3 @@ export const StyledRegularLink = styled(StyledNavLink)({
 export const StyledLastNavLink = styled(StyledNavLink)({
   float: "right",
 });
-
-// .Navbar-component {
-//     margin: 0 15px;
-//     display: inline;
-//     float: left;
-//   }
-//   .Navbar-component a {
-//     width: 100%;
-//     display: block;
-//     color: white;
-//     text-align: center;
-//     padding: 14px 16px;
-//     text-decoration: none;
-//   }
-//   .Navbar-component a:hover {
-//     background-color: #3f3f3f;
-//   }
-//   .Navbar-component:first-child a {
-//     font-size: larger;
-//   }

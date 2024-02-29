@@ -1,25 +1,57 @@
 import React, { useState } from "react";
 
-import { FormHelperText, InputLabel, Button } from "@mui/material";
+import {
+  FormHelperText,
+  InputLabel,
+  Button,
+  TextField,
+  FormControl,
+} from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
-import { ThemeProvider } from "@mui/material/styles";
 
 import Swal from "sweetalert2";
 
-import { AuthContext } from "../contexts/Auth.context";
-// import { CustomThemeContext } from "../../contexts/CustomTheme.context";
+import { AuthContext } from "../../contexts/Auth.context";
+
+import {
+  ButtonsContainer,
+  LoginHeader,
+  StyledContainer,
+  StyledLoginForm,
+  StyledLoginLogo,
+} from "./StyleAuth";
 
 export default function Authenticate() {
+  /* context */
   const { login, register } = React.useContext(AuthContext);
-  //   const { theme } = React.useContext(CustomThemeContext);
 
+  /* hooks */
   const [user, setUser] = useState({
     username: "",
     password: "",
   });
 
+  const [errors, setErrors] = useState({
+    username: "",
+    password: "",
+  });
+
+  const validate = (name, value) => {
+    const newErrors = {};
+
+    if (name === "username" && value.trim() === "") {
+      newErrors.username = "Username is required";
+    }
+
+    if (name === "password" && value.trim() === "") {
+      newErrors.password = "Password is required";
+    }
+    setErrors(newErrors);
+  };
+
+  /* handlers */
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -27,6 +59,7 @@ export default function Authenticate() {
       return { ...prevState, [name]: value };
     };
     setUser(updateState);
+    validate(name, value);
   };
 
   const handleLoginClick = async (event) => {
@@ -41,6 +74,10 @@ export default function Authenticate() {
     }
     await login(user);
     setUser({
+      username: "",
+      password: "",
+    });
+    setErrors({
       username: "",
       password: "",
     });
@@ -61,45 +98,52 @@ export default function Authenticate() {
       username: "",
       password: "",
     });
+    setErrors({
+      username: "",
+      password: "",
+    });
   };
 
   return (
-    <div className="login-container">
-      <div className="login-form">
-        {/* <h1 className="login-header">Login | Register</h1> */}
+    <StyledContainer>
+      <StyledLoginForm>
         <form className="Auth-form">
-          <h1 className="login-header">Login | Register</h1>
-          <InputLabel htmlFor="username">*Username:</InputLabel>
-          <input
+          <LoginHeader>Login | Register</LoginHeader>
+          <InputLabel htmlFor="username">Username:</InputLabel>
+          <TextField
             onChange={handleChange}
             id="username"
             name="username"
             value={user.username}
             autoComplete="off"
+            fullWidth
             required
+            error={Boolean(errors.username)}
+            helperText={errors.username}
           />
 
-          <InputLabel htmlFor="password">*Password:</InputLabel>
-          <input
+          <InputLabel htmlFor="password">Password:</InputLabel>
+          <TextField
             onChange={handleChange}
             name="password"
             value={user.password}
             type={"password"}
             autoComplete="off"
+            fullWidth
             required
+            error={Boolean(errors.password)}
+            helperText={errors.password}
           />
 
-          <FormHelperText>
-            We won't use your information. Your financial operations will be
-            stored safely.
-          </FormHelperText>
+          <FormHelperText>We won't use your information.</FormHelperText>
 
-          <div className="Auth-btns">
+          <ButtonsContainer>
             {/* <ThemeProvider theme={theme}> */}
             <Button
               className="Auth-btn"
               onClick={handleLoginClick}
               variant="contained"
+              color="success"
               // color="login"
             >
               <LoginIcon /> Login
@@ -111,6 +155,7 @@ export default function Authenticate() {
               className="Auth-btn"
               onClick={handleRegisterClick}
               variant="contained"
+              color="secondary"
               // color="register"
             >
               <HowToRegIcon />
@@ -118,19 +163,18 @@ export default function Authenticate() {
               Signup
             </Button>
             {/* </ThemeProvider> */}
-          </div>
+          </ButtonsContainer>
         </form>
-      </div>
+      </StyledLoginForm>
 
-      <div className="right-side">
+      <StyledLoginLogo>
         <AssignmentIndIcon
           className="login-page-icon"
           style={{ fontSize: "10rem" }}
         />
-        <h1 className="login-header">Financial Tracker App</h1>
-        <h4>Manage all your financial data in one place</h4>
-        <h5>Track your incomes & expenses and many more...</h5>
-      </div>
-    </div>
+        <LoginHeader>Personal Blog</LoginHeader>
+        <h3>Authorize yourself to become a part of the community...</h3>
+      </StyledLoginLogo>
+    </StyledContainer>
   );
 }

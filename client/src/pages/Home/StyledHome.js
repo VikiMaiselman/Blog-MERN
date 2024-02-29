@@ -19,7 +19,9 @@ export const StyledContainer = styled("div")({
 });
 
 export const SectionHeading = styled("div")({
-  margin: "0 20px",
+  "& h1": {
+    margin: "50px 20px 10px",
+  },
 });
 
 export const StyledTitle = styled("h2")({
@@ -31,6 +33,14 @@ export const StyledTitle = styled("h2")({
     fontSize: "1.5rem",
     lineHeight: "1",
   },
+});
+
+export const StyledParagraph = styled("p")({
+  width: "100%",
+  whiteSpace: "pre-line",
+  maxHeight: "9vh",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
 });
 
 export const ArticleFooter = styled("footer")({
