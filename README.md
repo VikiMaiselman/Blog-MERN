@@ -8,10 +8,10 @@
 - used styled components (.jss)
 - the project structure created with Vite (npm create vite@latest)
 - to start the project:
-git clone
-cd Blog-MERN
-npm install
-npm run dev
+    * git clone
+    * cd Blog-MERN
+    * npm install
+    * npm run dev
 - UI provides basic user functionality (as per requirements): CRUD for posts, CRUD for comments, separation of authorized/non-authorized users actions
 
 ## Backend
@@ -21,8 +21,8 @@ npm run dev
 - to run:
     * (npm install -g nodemon) - optionally, used for dev
     * cd Blog-MERN/api
-npm i
-nodemon app.js / node start app.js
+    * npm i
+    * nodemon app.js / node start app.js
 
 ## Project requirements implemented:
 - Basic Auth
