@@ -6,6 +6,8 @@ import usePostApi from "../../hooks/usePostApi";
 import { AuthContext } from "../../contexts/Auth.context";
 
 import { StyledContainer, StyledPostForm } from "./StyledPostForm";
+import { ThemeProvider } from "@emotion/react";
+import { CustomThemeContext } from "../../contexts/CustomTheme.context";
 
 export default function UpdatePostForm() {
   /* location & navigation */
@@ -15,6 +17,7 @@ export default function UpdatePostForm() {
 
   /* context */
   const { isAuthenticated } = React.useContext(AuthContext);
+  const { theme } = React.useContext(CustomThemeContext);
 
   /* hooks */
   const [, , , updatePost] = usePostApi();
@@ -49,7 +52,7 @@ export default function UpdatePostForm() {
   return (
     isAuthenticated && (
       <StyledContainer>
-        <h1>Update post</h1>
+        <h1>Update Post</h1>
 
         <StyledPostForm>
           <TextField
@@ -80,16 +83,18 @@ export default function UpdatePostForm() {
             fullWidth
             required
           />
-          <Button
-            type="submit"
-            onClick={handleClick}
-            color="secondary"
-            fontSize="small"
-            variant="contained"
-            sx={{ margin: "0 5px" }}
-          >
-            Save
-          </Button>
+          <ThemeProvider theme={theme}>
+            <Button
+              type="submit"
+              onClick={handleClick}
+              color="delete"
+              fontSize="small"
+              variant="contained"
+              sx={{ margin: "0 5px", width: "120px" }}
+            >
+              Save
+            </Button>
+          </ThemeProvider>
         </StyledPostForm>
       </StyledContainer>
     )

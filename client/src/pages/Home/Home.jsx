@@ -15,6 +15,8 @@ import {
   CustomDate,
   StyledParagraph,
 } from "./StyledHome";
+import { CustomThemeContext } from "../../contexts/CustomTheme.context";
+import { ThemeProvider } from "@emotion/react";
 
 export default function Home() {
   /* navigation */
@@ -22,6 +24,7 @@ export default function Home() {
 
   /* context */
   const { isAuthenticated, getUser } = React.useContext(AuthContext);
+  const { theme } = React.useContext(CustomThemeContext);
 
   /* hooks */
   const [posts, fetchPosts, , , deletePost] = usePostApi();
@@ -94,24 +97,29 @@ export default function Home() {
                     </div>
                     {user?.id === post.user._id && (
                       <div>
-                        <Button
-                          onClick={(e) => handleEdit(e, post)}
-                          color="success"
-                          fontSize="small"
-                          variant="outlined"
-                          sx={{ margin: "0 5px" }}
-                        >
-                          Edit
-                        </Button>
-                        <Button
-                          onClick={(e) => handleDelete(e, post._id)}
-                          color="secondary"
-                          fontSize="small"
-                          variant="outlined"
-                          sx={{ margin: "0 5px" }}
-                        >
-                          Delete
-                        </Button>
+                        <ThemeProvider theme={theme}>
+                          <Button
+                            onClick={(e) => handleEdit(e, post)}
+                            color="edit"
+                            fontSize="small"
+                            variant="outlined"
+                            sx={{ margin: "0 5px" }}
+                          >
+                            Edit
+                          </Button>
+                        </ThemeProvider>
+
+                        <ThemeProvider theme={theme}>
+                          <Button
+                            onClick={(e) => handleDelete(e, post._id)}
+                            color="delete"
+                            fontSize="small"
+                            variant="outlined"
+                            sx={{ margin: "0 5px" }}
+                          >
+                            Delete
+                          </Button>
+                        </ThemeProvider>
                       </div>
                     )}
                   </ArticleFooter>

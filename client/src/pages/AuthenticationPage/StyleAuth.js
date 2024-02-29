@@ -14,8 +14,6 @@ export const StyledContainer = styled("div")({
 });
 
 export const StyledLoginForm = styled("div")({
-  flex: "1",
-  height: "100vh",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
@@ -27,8 +25,6 @@ export const StyledLoginForm = styled("div")({
 });
 
 export const StyledLoginLogo = styled("div")({
-  flex: "1",
-  height: "100vh",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
@@ -37,12 +33,13 @@ export const StyledLoginLogo = styled("div")({
   flex: "1",
   padding: "50px",
   textAlign: "center",
-  background: "linear-gradient(to right, #444444, #5f6f52)",
-  color: "white",
+  background: "linear-gradient(to right, #EDFDFD, #A8B8C5)",
+  color: "black",
 });
 
 export const LoginHeader = styled("div")({
   fontSize: "3.5rem",
+  fontFamily: "cursive",
   marginTop: "0",
   marginBottom: "1.5%",
   "@media (max-width: 800px)": {
@@ -65,26 +62,3 @@ export const StyledInput = styled(TextField)({
     border: "none",
   },
 });
-
-// .Auth-form {
-//     height: 60vh;
-//     width: 100%;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//     align-items: center;
-//     gap: 2.5%;
-//   }
-
-//   .Auth-btns {
-//     margin-top: 2.5%;
-//     width: 100%;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     gap: 2.5%;
-//   }
-
-//   .login-page-icon {
-//     font-size: 10rem;
-//   }

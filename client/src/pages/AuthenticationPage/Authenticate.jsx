@@ -10,6 +10,7 @@ import {
 import LoginIcon from "@mui/icons-material/Login";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
+import FlutterDashIcon from "@mui/icons-material/FlutterDash";
 
 import Swal from "sweetalert2";
 
@@ -22,10 +23,13 @@ import {
   StyledLoginForm,
   StyledLoginLogo,
 } from "./StyleAuth";
+import { ThemeProvider } from "@emotion/react";
+import { CustomThemeContext } from "../../contexts/CustomTheme.context";
 
 export default function Authenticate() {
   /* context */
   const { login, register } = React.useContext(AuthContext);
+  const { theme } = React.useContext(CustomThemeContext);
 
   /* hooks */
   const [user, setUser] = useState({
@@ -138,40 +142,37 @@ export default function Authenticate() {
           <FormHelperText>We won't use your information.</FormHelperText>
 
           <ButtonsContainer>
-            {/* <ThemeProvider theme={theme}> */}
-            <Button
-              className="Auth-btn"
-              onClick={handleLoginClick}
-              variant="contained"
-              color="success"
-              // color="login"
-            >
-              <LoginIcon /> Login
-            </Button>
-            {/* </ThemeProvider> */}
+            <ThemeProvider theme={theme}>
+              <Button
+                className="Auth-btn"
+                onClick={handleLoginClick}
+                variant="contained"
+                color="success"
+                // color="login"
+              >
+                <LoginIcon /> Login
+              </Button>
+            </ThemeProvider>
 
-            {/* <ThemeProvider theme={theme}> */}
-            <Button
-              className="Auth-btn"
-              onClick={handleRegisterClick}
-              variant="contained"
-              color="secondary"
-              // color="register"
-            >
-              <HowToRegIcon />
-              {"  "}
-              Signup
-            </Button>
-            {/* </ThemeProvider> */}
+            <ThemeProvider theme={theme}>
+              <Button
+                className="Auth-btn"
+                onClick={handleRegisterClick}
+                variant="contained"
+                color="secondary"
+                // color="register"
+              >
+                <HowToRegIcon />
+                {"  "}
+                Signup
+              </Button>
+            </ThemeProvider>
           </ButtonsContainer>
         </form>
       </StyledLoginForm>
 
       <StyledLoginLogo>
-        <AssignmentIndIcon
-          className="login-page-icon"
-          style={{ fontSize: "10rem" }}
-        />
+        <FlutterDashIcon style={{ fontSize: "10rem" }} />
         <LoginHeader>Personal Blog</LoginHeader>
         <h3>Authorize yourself to become a part of the community...</h3>
       </StyledLoginLogo>

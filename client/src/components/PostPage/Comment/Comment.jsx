@@ -5,13 +5,68 @@ import {
   Author,
   CustomDate,
   CommentContainer,
+  UpdateCommentContainer,
 } from "./StyledComment";
-import { Button } from "@mui/material";
+import { Button, TextField } from "@mui/material";
+import { ThemeProvider } from "@emotion/react";
+import { CustomThemeContext } from "../../../contexts/CustomTheme.context";
 
-export default function Comment({ comment, writtenByThisUser }) {
+export default function Comment({
+  comment,
+  writtenByThisUser,
+  handleUpdate,
+  handleDelete,
+}) {
+  /* context */
+  const { theme } = React.useContext(CustomThemeContext);
+
+  /* hooks */
+  const [isEditing, setIsEditing] = React.useState(false);
+  const [text, setText] = React.useState(comment.content);
+
+  /* handlers */
+  const handleEditComment = () => {
+    setIsEditing(true);
+  };
+  const handleChange = (e) => {
+    setText(e.target.value);
+  };
+  const handleSave = () => {
+    setIsEditing(false);
+    comment.content = text;
+    handleUpdate(comment);
+  };
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      console.log("TRUE");
+      handleSave();
+    }
+  };
+
+  const handleDeleteComment = () => {
+    handleDelete(comment._id);
+  };
   return (
     <CommentContainer>
-      <p>{comment.content}</p>
+      {!isEditing ? (
+        <p>{comment.content}</p>
+      ) : (
+        <UpdateCommentContainer>
+          <TextField
+            required
+            fullWidth
+            multiline
+            name="text"
+            value={text}
+            onChange={handleChange}
+            onKeyDown={handleKeyDown}
+          />
+          <Button onClick={handleSave} variant="text" color="success">
+            Save Comment
+          </Button>
+        </UpdateCommentContainer>
+      )}
+
       <CommentAdditionalInfo>
         <div>
           <Author>{comment.author}</Author>
@@ -28,22 +83,26 @@ export default function Comment({ comment, writtenByThisUser }) {
 
         {writtenByThisUser && (
           <div>
-            <Button
-              onClick={() => handleEditPost(post)}
-              color="success"
-              fontSize="small"
-              sx={{ margin: "0 5px" }}
-            >
-              Edit
-            </Button>
-            <Button
-              onClick={() => handleDeletePost(post._id)}
-              color="secondary"
-              fontSize="small"
-              sx={{ margin: "0 5px" }}
-            >
-              Delete
-            </Button>
+            <ThemeProvider theme={theme}>
+              <Button
+                onClick={handleEditComment}
+                color="edit"
+                fontSize="small"
+                sx={{ margin: "0 5px" }}
+              >
+                Edit
+              </Button>
+            </ThemeProvider>
+            <ThemeProvider theme={theme}>
+              <Button
+                onClick={handleDeleteComment}
+                color="delete"
+                fontSize="small"
+                sx={{ margin: "0 5px" }}
+              >
+                Delete
+              </Button>
+            </ThemeProvider>
           </div>
         )}
       </CommentAdditionalInfo>

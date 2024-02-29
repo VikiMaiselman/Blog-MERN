@@ -19,6 +19,8 @@ import {
   StyledHeader,
   LiveCommentContainer,
 } from "./StyledPost";
+import { ThemeProvider } from "@emotion/react";
+import { CustomThemeContext } from "../../contexts/CustomTheme.context";
 
 export default function Post() {
   /* location & navigation */
@@ -26,12 +28,15 @@ export default function Post() {
   const location = useLocation();
   const { post, user } = location.state;
 
+  /* context */
   const { isAuthenticated } = React.useContext(AuthContext);
+  const { theme } = React.useContext(CustomThemeContext);
 
   /* hooks */
   const [hasSubmittedComment, setHasSubmittedComment] = React.useState(false);
   const [, , , , deletePost] = usePostApi();
-  const [comments, fetchComments] = useCommentApi();
+  const [comments, fetchComments, , updateComment, deleteComment] =
+    useCommentApi();
   console.log(user);
 
   React.useEffect(() => {
@@ -47,8 +52,12 @@ export default function Post() {
     navigate("/update-post", { replace: true, state: { postToUpdate: post } });
   };
 
-  const handleUpdateComment = () => {};
-  const handleDeleteComment = () => {};
+  const handleUpdateComment = (comment) => {
+    updateComment(comment, post._id);
+  };
+  const handleDeleteComment = (commentId) => {
+    deleteComment(commentId, post._id);
+  };
 
   return (
     <StyledContainer>
@@ -71,24 +80,29 @@ export default function Post() {
 
           {user.id === post.user._id && (
             <div>
-              <Button
-                onClick={() => handleEditPost(post)}
-                color="success"
-                fontSize="small"
-                variant="outlined"
-                sx={{ margin: "0 5px" }}
-              >
-                Edit Post
-              </Button>
-              <Button
-                onClick={() => handleDeletePost(post._id)}
-                color="secondary"
-                fontSize="small"
-                variant="outlined"
-                sx={{ margin: "0 5px" }}
-              >
-                Delete Post
-              </Button>
+              <ThemeProvider theme={theme}>
+                <Button
+                  onClick={() => handleEditPost(post)}
+                  color="edit"
+                  fontSize="small"
+                  variant="outlined"
+                  sx={{ margin: "0 5px" }}
+                >
+                  Edit Post
+                </Button>
+              </ThemeProvider>
+
+              <ThemeProvider theme={theme}>
+                <Button
+                  onClick={() => handleDeletePost(post._id)}
+                  color="delete"
+                  fontSize="small"
+                  variant="outlined"
+                  sx={{ margin: "0 5px" }}
+                >
+                  Delete Post
+                </Button>
+              </ThemeProvider>
             </div>
           )}
         </ArticleFooter>
@@ -101,6 +115,8 @@ export default function Post() {
                 <Comment
                   comment={comment}
                   writtenByThisUser={user.id === post.user._id}
+                  handleUpdate={handleUpdateComment}
+                  handleDelete={handleDeleteComment}
                 />
               );
             })

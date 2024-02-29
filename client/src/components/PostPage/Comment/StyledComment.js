@@ -14,6 +14,10 @@ export const CommentContainer = styled("div")({
   },
 });
 
+export const UpdateCommentContainer = styled("div")({
+  display: "flex",
+});
+
 export const CommentAdditionalInfo = styled("footer")({
   color: "#818181",
   fontSize: "0.875rem",

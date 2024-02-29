@@ -40,5 +40,37 @@ export default function useCommentApi() {
     } catch (err) {}
   };
 
-  return [comments, fetchComments, createComment];
+  const updateComment = async (comment, postId) => {
+    console.log("UPDATING COMMENT", comment);
+
+    try {
+      const response = await axios.patch(
+        `${url}/comment/upd`,
+        { updatedComment: comment },
+        { withCredentials: true },
+        headers
+      );
+      const commentsInDB = fetchComments(postId);
+      console.log(commentsInDB);
+    } catch (err) {}
+  };
+
+  const deleteComment = async (commentId, postId) => {
+    console.log("DELETNG Comment", commentId);
+
+    try {
+      const response = await axios.post(
+        `${url}/comment/del`,
+        { commentId: commentId },
+        { withCredentials: true },
+        headers
+      );
+      const commentsInDB = fetchComments(postId);
+      console.log(commentsInDB);
+    } catch (err) {
+      console.dir(err);
+    }
+  };
+
+  return [comments, fetchComments, createComment, updateComment, deleteComment];
 }

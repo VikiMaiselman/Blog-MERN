@@ -4,6 +4,8 @@ import usePostApi from "../../hooks/usePostApi";
 import { AuthContext } from "../../contexts/Auth.context";
 import { Button, TextField } from "@mui/material";
 import { StyledContainer, StyledPostForm } from "./StyledPostForm";
+import { ThemeProvider } from "@emotion/react";
+import { CustomThemeContext } from "../../contexts/CustomTheme.context";
 
 export default function NewPostForm() {
   /* navigation */
@@ -11,6 +13,7 @@ export default function NewPostForm() {
 
   /* context */
   const { isAuthenticated } = React.useContext(AuthContext);
+  const { theme } = React.useContext(CustomThemeContext);
 
   /* hooks */
   const [posts, fetchPosts, createPost] = usePostApi();
@@ -43,7 +46,7 @@ export default function NewPostForm() {
   return (
     isAuthenticated && (
       <StyledContainer>
-        <h1>NEW POST</h1>
+        <h1>New Post</h1>
 
         <StyledPostForm>
           <TextField
@@ -74,16 +77,18 @@ export default function NewPostForm() {
             fullWidth
             required
           />
-          <Button
-            type="submit"
-            onClick={handleClick}
-            color="secondary"
-            fontSize="small"
-            variant="contained"
-            sx={{ margin: "0 5px" }}
-          >
-            Create
-          </Button>
+          <ThemeProvider theme={theme}>
+            <Button
+              type="submit"
+              onClick={handleClick}
+              color="delete"
+              fontSize="small"
+              variant="contained"
+              sx={{ margin: "0 5px", width: "120px" }}
+            >
+              Create
+            </Button>
+          </ThemeProvider>
         </StyledPostForm>
       </StyledContainer>
     )
