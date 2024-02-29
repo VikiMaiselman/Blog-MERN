@@ -3,17 +3,16 @@ import { Link } from "react-router-dom";
 
 import { AuthContext } from "../../contexts/Auth.context";
 
-import SavingsOutlinedIcon from "@mui/icons-material/SavingsOutlined";
-import AddCircleOutlineSharpIcon from "@mui/icons-material/AddCircleOutlineSharp";
-import CurrencyExchangeSharpIcon from "@mui/icons-material/CurrencyExchangeSharp";
-import ReorderTwoToneIcon from "@mui/icons-material/ReorderTwoTone";
+import InfoIcon from "@mui/icons-material/Info";
+import CreateIcon from "@mui/icons-material/Create";
+import ArticleIcon from "@mui/icons-material/Article";
 import LogoutSharpIcon from "@mui/icons-material/LogoutSharp";
-import AccountBalanceSharpIcon from "@mui/icons-material/AccountBalanceSharp";
 
 import {
   StyledNavContainer,
   StyledRegularLink,
   StyledLastNavLink,
+  NavbarImageTitle,
 } from "./StyledNavbar";
 
 export default function Navbar() {
@@ -36,43 +35,27 @@ export default function Navbar() {
           height={"400"}
           style={{ objectFit: "cover" }}
         />
-        <h1
-          style={{
-            position: "absolute",
-            top: "15%",
-            left: "38%",
-            fontFamily: "cursive",
-            fontSize: "5rem",
-          }}
-        >
-          Viki Blog...
-        </h1>
+        <NavbarImageTitle>Viki Blog...</NavbarImageTitle>
       </div>
       <StyledNavContainer>
         <StyledRegularLink className="Navbar-component">
           <Link to="/">
-            <AccountBalanceSharpIcon
-              sx={{ fontSize: "1rem", verticalAlign: "-2px" }}
-            />
-            &nbsp;Posts
+            <ArticleIcon sx={{ fontSize: "1rem", verticalAlign: "-2px" }} />
+            Posts
           </Link>
         </StyledRegularLink>
         {isAuthenticated && (
           <>
             <StyledRegularLink className="Navbar-component">
               <Link to="/about">
-                <SavingsOutlinedIcon
-                  sx={{ fontSize: "1rem", verticalAlign: "-2px" }}
-                />
-                &nbsp;About Author
+                <InfoIcon sx={{ fontSize: "1rem", verticalAlign: "-2px" }} />
+                About Author
               </Link>
             </StyledRegularLink>
             <StyledRegularLink className="Navbar-component">
               <Link to="/newpost">
-                <SavingsOutlinedIcon
-                  sx={{ fontSize: "1rem", verticalAlign: "-2px" }}
-                />
-                &nbsp;Create Post
+                <CreateIcon sx={{ fontSize: "1rem", verticalAlign: "-2px" }} />
+                Create Post
               </Link>
             </StyledRegularLink>
             <StyledLastNavLink className="Navbar-component">
@@ -80,7 +63,7 @@ export default function Navbar() {
                 <LogoutSharpIcon
                   sx={{ fontSize: "1rem", verticalAlign: "-2px" }}
                 />
-                &nbsp;Logout
+                Logout
               </Link>
             </StyledLastNavLink>
           </>
@@ -91,7 +74,7 @@ export default function Navbar() {
               <LogoutSharpIcon
                 sx={{ fontSize: "1rem", verticalAlign: "-2px" }}
               />
-              &nbsp;Sign Up / Log In
+              Sign Up / Log In
             </Link>
           </StyledLastNavLink>
         )}

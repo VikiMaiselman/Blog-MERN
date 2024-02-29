@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 
 import { url, headers } from "../service/config";
+import Swal from "sweetalert2";
 
 export default function useCommentApi() {
   const [comments, setComments] = React.useState("");
@@ -21,7 +22,16 @@ export default function useCommentApi() {
 
       setComments(sortedComments);
       return commentsInDB;
-    } catch (err) {}
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        title: "Ooops!",
+        text: error.response.data,
+        icon: "error",
+        confirmButtonColor: "rgb(154, 68, 68)",
+        iconColor: "rgb(154, 68, 68)",
+      });
+    }
   };
 
   const createComment = async (comment, postId) => {
@@ -37,7 +47,16 @@ export default function useCommentApi() {
       console.log("CREATING COMMENT", response.data, commentsInDB);
       await fetchComments(postId);
       return commentsInDB;
-    } catch (err) {}
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        title: "Ooops!",
+        text: error.response.data,
+        icon: "error",
+        confirmButtonColor: "rgb(154, 68, 68)",
+        iconColor: "rgb(154, 68, 68)",
+      });
+    }
   };
 
   const updateComment = async (comment, postId) => {
@@ -52,7 +71,16 @@ export default function useCommentApi() {
       );
       const commentsInDB = fetchComments(postId);
       console.log(commentsInDB);
-    } catch (err) {}
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        title: "Ooops!",
+        text: error.response.data,
+        icon: "error",
+        confirmButtonColor: "rgb(154, 68, 68)",
+        iconColor: "rgb(154, 68, 68)",
+      });
+    }
   };
 
   const deleteComment = async (commentId, postId) => {
@@ -67,8 +95,15 @@ export default function useCommentApi() {
       );
       const commentsInDB = fetchComments(postId);
       console.log(commentsInDB);
-    } catch (err) {
-      console.dir(err);
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        title: "Ooops!",
+        text: error.response.data,
+        icon: "error",
+        confirmButtonColor: "rgb(154, 68, 68)",
+        iconColor: "rgb(154, 68, 68)",
+      });
     }
   };
 

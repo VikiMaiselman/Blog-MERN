@@ -2,22 +2,29 @@ import React from "react";
 
 import { url, headers } from "../service/config";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default function usePostApi() {
   const [posts, setPosts] = React.useState();
-
-  // fetchPosts, createPost, updatePost, deletePost
   const fetchPosts = async () => {
     try {
       const response = await axios.get(url, { withCredentials: true }, headers);
       const postsInDB = response.data;
       setPosts(postsInDB);
       return postsInDB;
-    } catch (err) {}
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        title: "Ooops!",
+        text: error.response.data,
+        icon: "error",
+        confirmButtonColor: "rgb(154, 68, 68)",
+        iconColor: "rgb(154, 68, 68)",
+      });
+    }
   };
 
   const createPost = async (post) => {
-    console.log("CREATING POST", post);
     try {
       await axios.post(
         url,
@@ -26,12 +33,19 @@ export default function usePostApi() {
         headers
       );
       const postsInDB = fetchPosts();
-      console.log(postsInDB);
-    } catch (err) {}
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        title: "Ooops!",
+        text: error.response.data,
+        icon: "error",
+        confirmButtonColor: "rgb(154, 68, 68)",
+        iconColor: "rgb(154, 68, 68)",
+      });
+    }
   };
 
   const updatePost = async (post) => {
-    console.log("UPDATING POST", post);
     try {
       await axios.patch(
         `${url}/update-post`,
@@ -40,12 +54,19 @@ export default function usePostApi() {
         headers
       );
       const postsInDB = fetchPosts();
-      console.log(postsInDB);
-    } catch (err) {}
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        title: "Ooops!",
+        text: error.response.data,
+        icon: "error",
+        confirmButtonColor: "rgb(154, 68, 68)",
+        iconColor: "rgb(154, 68, 68)",
+      });
+    }
   };
 
   const deletePost = async (postId) => {
-    console.log("DELETNG POST", postId);
     try {
       await axios.post(
         `${url}/delete-post`,
@@ -53,8 +74,16 @@ export default function usePostApi() {
         { withCredentials: true },
         headers
       );
-      const postsInDB = fetchPosts();
-    } catch (err) {}
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        title: "Ooops!",
+        text: error.response.data,
+        icon: "error",
+        confirmButtonColor: "rgb(154, 68, 68)",
+        iconColor: "rgb(154, 68, 68)",
+      });
+    }
   };
 
   return [posts, fetchPosts, createPost, updatePost, deletePost];

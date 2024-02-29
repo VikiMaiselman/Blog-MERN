@@ -45,6 +45,10 @@ export const LoginHeader = styled("div")({
   "@media (max-width: 800px)": {
     fontSize: "2rem",
   },
+  "@media (max-width: 400px)": {
+    fontSize: "1rem",
+    marginBottom: "0",
+  },
 });
 
 export const ButtonsContainer = styled("div")({

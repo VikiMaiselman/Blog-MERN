@@ -62,6 +62,4 @@ export const StyledHeader = styled("h2")({
 export const LiveCommentContainer = styled("div")({
   width: "100%",
   margin: "25px 0",
-  //   display: "flex",
-  //   alignItems: "center",
 });

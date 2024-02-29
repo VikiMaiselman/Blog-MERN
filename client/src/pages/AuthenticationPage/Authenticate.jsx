@@ -148,7 +148,6 @@ export default function Authenticate() {
                 onClick={handleLoginClick}
                 variant="contained"
                 color="success"
-                // color="login"
               >
                 <LoginIcon /> Login
               </Button>
@@ -160,7 +159,6 @@ export default function Authenticate() {
                 onClick={handleRegisterClick}
                 variant="contained"
                 color="secondary"
-                // color="register"
               >
                 <HowToRegIcon />
                 {"  "}

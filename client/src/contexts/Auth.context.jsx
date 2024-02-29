@@ -63,7 +63,7 @@ export default function AuthProvider({ children }) {
       console.error(error);
       Swal.fire({
         title: "Ooops!",
-        text: "This user does not exist. Are you sure you don't need to sign up?",
+        text: "This user does not exist or the password entered is wrong.",
         icon: "error",
       });
     }

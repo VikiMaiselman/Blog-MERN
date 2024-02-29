@@ -16,11 +16,17 @@ export const StyledContainer = styled("div")({
     opacity: "0.5",
     transition: "opacity 0.5s ease-out",
   },
+  "@media (max-width: 415px)": {
+    width: "80%",
+  },
 });
 
 export const SectionHeading = styled("div")({
   "& h1": {
     margin: "50px 20px 10px",
+  },
+  "@media (max-width: 670px)": {
+    fontSize: "0.8rem",
   },
 });
 
@@ -33,6 +39,9 @@ export const StyledTitle = styled("h2")({
     fontSize: "1.5rem",
     lineHeight: "1",
   },
+  "@media (max-width: 670px)": {
+    fontSize: "1rem",
+  },
 });
 
 export const StyledParagraph = styled("p")({
@@ -41,6 +50,10 @@ export const StyledParagraph = styled("p")({
   maxHeight: "9vh",
   overflow: "hidden",
   textOverflow: "ellipsis",
+  "@media (max-width: 670px)": {
+    fontSize: "0.8rem",
+    maxHeight: "7vh",
+  },
 });
 
 export const ArticleFooter = styled("footer")({
