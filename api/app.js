@@ -13,9 +13,9 @@ const port = 3008;
 // CORS (development stage only)
 app.use(
   cors({
-    origin: "http://localhost:5173", // allow to server to accept request from different origin
+    origin: "http://localhost:5173", // allows the server to accept request from React app
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true, // allow session cookie from browser to pass through
+    credentials: true, // allows session cookie from browser to pass through
   })
 );
 app.use("*", function (req, res, next) {
@@ -27,11 +27,11 @@ app.use("*", function (req, res, next) {
 });
 app.options("*", cors());
 
-// Parser
+// Parsers
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Authentication
+// Authentication (initialize passport + session)
 app.use(
   session({
     secret: process.env.PASSPORT_SECRET,
@@ -48,11 +48,13 @@ import { postRoutes } from "./posts/postRoute.js";
 import { commentRoutes } from "./comments/commentRoute.js";
 import { userAuthRoutes } from "./users/userRoute.js";
 
+// DB init
 initializeDatabase();
 
+// Routes
 app.use(userAuthRoutes);
 app.use(postRoutes);
-app.use("/comment", commentRoutes);
+app.use(commentRoutes);
 
 // Listening to incoming requests
 app.listen(port, () => console.log(`Server's up. Listening on port ${port}`));

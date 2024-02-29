@@ -8,10 +8,9 @@ let Comment, Post, User;
 /* ************ C O N F I G U R E   D A T A B A S E ************ */
 async function initializeDatabase() {
   try {
-    await mongoose.connect("mongodb://localhost:27017/Blog");
+    await mongoose.connect(process.env.DB_URL);
   } catch (error) {
-    console.error(error);
-    // handle error appropriately
+    console.error("Connection with database could not be established", error);
   }
 
   /* create mongodb schemas */
