@@ -56,6 +56,5 @@ export const getStatus = async (req, res) => {
 };
 
 export const getCurrentUser = async (req, res) => {
-  console.log(req.user);
-  res.send(req.user?._id);
+  res.send({ id: req.user?._id, username: req.user?.username });
 };
