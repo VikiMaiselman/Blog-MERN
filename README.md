@@ -19,8 +19,8 @@ npm run dev
 - used MVC architecture to structure the project
 - database used in the project is MongoDB (via mongoose)
 - to run:
-* (npm install -g nodemon) - optionally, used for dev
-* cd Blog-MERN/api
+    * (npm install -g nodemon) - optionally, used for dev
+    * cd Blog-MERN/api
 npm i
 nodemon app.js / node start app.js
 
