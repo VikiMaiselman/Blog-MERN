@@ -6,12 +6,10 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import useCommentApi from "../../../hooks/useCommentApi";
 
-export default function CreateCommentDialog({ author, id, hasSubmitted }) {
+export default function CreateCommentDialog({ author, id, createComment }) {
   const [open, setOpen] = React.useState(false);
   const [content, setContent] = React.useState("");
-  const [, , createComment] = useCommentApi();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -29,7 +27,6 @@ export default function CreateCommentDialog({ author, id, hasSubmitted }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     createComment({ content: content, author: author }, id);
-    hasSubmitted(true);
     handleClose();
   };
 
@@ -53,7 +50,6 @@ export default function CreateCommentDialog({ author, id, hasSubmitted }) {
         <DialogTitle>Add Comment</DialogTitle>
         <DialogContent>
           <TextField
-            autoFocus
             required
             margin="dense"
             label="Content"
@@ -65,6 +61,7 @@ export default function CreateCommentDialog({ author, id, hasSubmitted }) {
             multiline
             maxRows={25}
             variant="standard"
+            autoFocus
           />
         </DialogContent>
         <DialogActions>

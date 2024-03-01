@@ -15,7 +15,6 @@ export default function useCommentApi() {
         headers
       );
       const commentsInDB = response.data;
-      console.log("FETCHING COMMENTS", commentsInDB);
       const sortedComments = commentsInDB?.sort(
         (a, b) => new Date(b.creationDate) - new Date(a.creationDate)
       );
@@ -36,7 +35,6 @@ export default function useCommentApi() {
 
   const createComment = async (comment, postId) => {
     try {
-      console.log(comment);
       const response = await axios.post(
         `${url}/comment/${postId}`,
         comment,
@@ -44,7 +42,6 @@ export default function useCommentApi() {
         headers
       );
       const commentsInDB = response.data;
-      console.log("CREATING COMMENT", response.data, commentsInDB);
       await fetchComments(postId);
       return commentsInDB;
     } catch (error) {
@@ -60,17 +57,14 @@ export default function useCommentApi() {
   };
 
   const updateComment = async (comment, postId) => {
-    console.log("UPDATING COMMENT", comment);
-
     try {
-      const response = await axios.patch(
+      await axios.patch(
         `${url}/comment/upd`,
         { updatedComment: comment },
         { withCredentials: true },
         headers
       );
-      const commentsInDB = fetchComments(postId);
-      console.log(commentsInDB);
+      fetchComments(postId);
     } catch (error) {
       console.error(error);
       Swal.fire({
@@ -84,8 +78,6 @@ export default function useCommentApi() {
   };
 
   const deleteComment = async (commentId, postId) => {
-    console.log("DELETNG Comment", commentId);
-
     try {
       const response = await axios.post(
         `${url}/comment/del`,
@@ -93,8 +85,7 @@ export default function useCommentApi() {
         { withCredentials: true },
         headers
       );
-      const commentsInDB = fetchComments(postId);
-      console.log(commentsInDB);
+      fetchComments(postId);
     } catch (error) {
       console.error(error);
       Swal.fire({

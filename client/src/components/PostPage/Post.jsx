@@ -33,15 +33,13 @@ export default function Post() {
   const { theme } = React.useContext(CustomThemeContext);
 
   /* hooks */
-  const [hasSubmittedComment, setHasSubmittedComment] = React.useState(false);
   const [, , , , deletePost] = usePostApi();
-  const [comments, fetchComments, , updateComment, deleteComment] =
+  const [comments, fetchComments, createComment, updateComment, deleteComment] =
     useCommentApi();
-  console.log(user);
 
   React.useEffect(() => {
     fetchComments(post._id);
-  }, [hasSubmittedComment]);
+  }, []);
 
   /* handlers */
   const handleDeletePost = (id) => {
@@ -51,6 +49,9 @@ export default function Post() {
   const handleEditPost = (post) => {
     navigate("/update-post", { replace: true, state: { postToUpdate: post } });
   };
+  const handleCreateComment = (comment) => {
+    createComment(comment, post._id);
+  };
 
   const handleUpdateComment = (comment) => {
     updateComment(comment, post._id);
@@ -59,6 +60,7 @@ export default function Post() {
     deleteComment(commentId, post._id);
   };
 
+  console.log("render");
   return (
     <StyledContainer>
       <ScrolledContainer>
@@ -131,7 +133,7 @@ export default function Post() {
             <CreateCommentDialog
               author={user.username}
               id={post._id}
-              hasSubmitted={setHasSubmittedComment}
+              createComment={handleCreateComment}
             />
           </LiveCommentContainer>
         )}
