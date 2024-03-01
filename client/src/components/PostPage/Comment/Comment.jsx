@@ -38,7 +38,6 @@ export default function Comment({
   };
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      console.log("TRUE");
       handleSave();
     }
   };

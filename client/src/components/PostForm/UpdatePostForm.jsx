@@ -38,7 +38,6 @@ export default function UpdatePostForm() {
     setPost(updatePostState);
   };
   const handleClick = (e) => {
-    console.log(post);
     e.preventDefault();
     updatePost(post);
     setPost({

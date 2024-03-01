@@ -60,7 +60,6 @@ export default function Post() {
     deleteComment(commentId, post._id);
   };
 
-  console.log("render");
   return (
     <StyledContainer>
       <ScrolledContainer>
@@ -116,7 +115,7 @@ export default function Post() {
               return (
                 <Comment
                   comment={comment}
-                  writtenByThisUser={user.id === post.user._id}
+                  writtenByThisUser={user.id === comment.user._id}
                   handleUpdate={handleUpdateComment}
                   handleDelete={handleDeleteComment}
                 />

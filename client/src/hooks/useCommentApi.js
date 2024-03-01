@@ -16,7 +16,7 @@ export default function useCommentApi() {
       );
       const commentsInDB = response.data;
       const sortedComments = commentsInDB?.sort(
-        (a, b) => new Date(b.creationDate) - new Date(a.creationDate)
+        (a, b) => new Date(a.creationDate) - new Date(b.creationDate)
       );
 
       setComments(sortedComments);
