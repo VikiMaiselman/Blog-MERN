@@ -15,7 +15,7 @@ export const ScrolledContainer = styled("div")({
   justifyContent: "center",
   overflow: "hidden",
   margin: "0 auto 10px",
-  padding: "0 35px 10px",
+  padding: "0 35px 25px",
   width: "calc(var(30px) * 2)",
   height: "calc(var(30px) * 2)",
   boxShadow: "0 4px 15px rgba(0, 0, 0, 0.1)",

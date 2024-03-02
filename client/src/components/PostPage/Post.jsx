@@ -109,7 +109,9 @@ export default function Post() {
           )}
         </ArticleFooter>
 
-        {comments?.length !== 0 && <StyledHeader>Comments:</StyledHeader>}
+        <StyledHeader>
+          {comments.length} Comments{comments?.length !== 0 && ":"}
+        </StyledHeader>
         {comments &&
           React.Children.toArray(
             comments.map((comment) => {
