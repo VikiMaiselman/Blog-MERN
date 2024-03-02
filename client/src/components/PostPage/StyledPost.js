@@ -13,12 +13,9 @@ export const ScrolledContainer = styled("div")({
   flexDirection: "column",
   alignItems: "flex-start",
   justifyContent: "center",
-  position: "absolute",
   overflow: "hidden",
-  left: "0",
-  right: "0",
-  margin: "0 auto 20px",
-  padding: "0 35px",
+  margin: "0 auto 10px",
+  padding: "0 35px 10px",
   width: "calc(var(30px) * 2)",
   height: "calc(var(30px) * 2)",
   boxShadow: "0 4px 15px rgba(0, 0, 0, 0.1)",
@@ -27,8 +24,17 @@ export const ScrolledContainer = styled("div")({
   zIndex: "4",
 });
 
+export const PostTitle = styled("h1")({
+  "@media (max-width: 670px)": {
+    fontSize: "1.4rem",
+  },
+});
+
 export const TextContent = styled("p")({
   textAlign: "justify",
+  "@media (max-width: 670px)": {
+    fontSize: "0.85rem",
+  },
 });
 
 export const ArticleFooter = styled("footer")({

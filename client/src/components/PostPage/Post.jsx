@@ -18,6 +18,7 @@ import {
   CustomDate,
   StyledHeader,
   LiveCommentContainer,
+  PostTitle,
 } from "./StyledPost";
 import { ThemeProvider } from "@emotion/react";
 import { CustomThemeContext } from "../../contexts/CustomTheme.context";
@@ -63,7 +64,7 @@ export default function Post() {
   return (
     <StyledContainer>
       <ScrolledContainer>
-        <h1>{post.title}</h1>
+        <PostTitle>{post.title}</PostTitle>
         <TextContent>{post.content}</TextContent>
         <ArticleFooter>
           <div>

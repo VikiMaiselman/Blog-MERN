@@ -9,6 +9,7 @@ import { AuthContext } from "../../contexts/Auth.context";
 import {
   StyledContainer,
   SectionHeading,
+  PostsList,
   StyledTitle,
   ArticleFooter,
   Author,
@@ -70,7 +71,7 @@ export default function Home() {
         </Link>
       )}
 
-      <ul id="postsList">
+      <PostsList>
         {posts &&
           React.Children.toArray(
             sortedPosts.map((post) => {
@@ -127,7 +128,7 @@ export default function Home() {
               );
             })
           )}
-      </ul>
+      </PostsList>
     </div>
   );
 }

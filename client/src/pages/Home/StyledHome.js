@@ -30,6 +30,13 @@ export const SectionHeading = styled("div")({
   },
 });
 
+export const PostsList = styled("ul")({
+  padding: "0 100px",
+  "@media (max-width: 670px)": {
+    padding: "0 25px",
+  },
+});
+
 export const StyledTitle = styled("h2")({
   fontSize: "2.25rem",
   margin: "15px 0",
@@ -46,7 +53,7 @@ export const StyledTitle = styled("h2")({
 
 export const StyledParagraph = styled("p")({
   width: "100%",
-  whiteSpace: "pre-line",
+  whiteSpace: "pre",
   maxHeight: "9vh",
   overflow: "hidden",
   textOverflow: "ellipsis",
