@@ -8,7 +8,7 @@ let Comment, Post, User;
 /* ************ C O N F I G U R E   D A T A B A S E ************ */
 async function initializeDatabase() {
   try {
-    await mongoose.connect(process.env.DB_URL);
+    await mongoose.connect(process.env.DB_ATLAS_URL);
   } catch (error) {
     console.error("Connection with database could not be established", error);
   }

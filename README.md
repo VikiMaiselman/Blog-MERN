@@ -8,8 +8,8 @@
 - used styled components (.jss)
 - the project structure created with Vite (npm create vite@latest)
 - to start the project:
-    * git clone
-    * cd Blog-MERN
+    * git clone 
+    * cd Blog-MERN/client
     * npm install
     * npm run dev
 - UI provides basic user functionality (as per requirements): CRUD for posts, CRUD for comments, separation of authorized/non-authorized users actions
@@ -23,6 +23,9 @@
     * cd Blog-MERN/api
     * npm i
     * nodemon app.js / node start app.js
+
+## Database
+- MongoDb can be installed locally, but right now it is running on Atlas free tier (meaning nothing has to be done explicitly to work with the project, but the request processing time on the backend side is somewhat slow compared to using Mongo paid tiers)
 
 ## Project requirements implemented:
 - Basic Auth
