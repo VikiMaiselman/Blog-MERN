@@ -9,19 +9,24 @@ import UpdatePost from "./PostForm/UpdatePostForm";
 import Post from "./PostPage/Post";
 import Authenticate from "../pages/AuthenticationPage/Authenticate";
 import Logout from "../pages/Logout";
+import { AuthContext } from "../contexts/Auth.context";
 
 export default function AppRouter() {
+  const { isAuthenticated } = React.useContext(AuthContext);
   return (
     <>
       <Navbar />
       <Routes>
         <Route path="/" index element={<Home />} />
-        <Route path="/about" element={<AboutAuthor />} />
-        <Route path="/newpost" element={<NewPost />} />
-        <Route path="/update-post" element={<UpdatePost />} />
+        {isAuthenticated && <Route path="/about" element={<AboutAuthor />} />}
+        {isAuthenticated && <Route path="/newpost" element={<NewPost />} />}
+        {isAuthenticated && (
+          <Route path="/update-post" element={<UpdatePost />} />
+        )}
         <Route path="/post" element={<Post />} />
-        <Route path="/logout" element={<Logout />} />
+        {isAuthenticated && <Route path="/logout" element={<Logout />} />}
         <Route path="/authenticate" element={<Authenticate />} />
+        <Route path="*" element={<Authenticate />} />
       </Routes>
     </>
   );

@@ -6,6 +6,7 @@ import {
   CustomDate,
   CommentContainer,
   UpdateCommentContainer,
+  StyledButton,
 } from "./StyledComment";
 import { Button, TextField } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
@@ -83,24 +84,22 @@ export default function Comment({
         {writtenByThisUser && (
           <div>
             <ThemeProvider theme={theme}>
-              <Button
+              <StyledButton
                 onClick={handleEditComment}
                 color="edit"
                 fontSize="small"
-                sx={{ margin: "0 5px" }}
               >
                 Edit
-              </Button>
+              </StyledButton>
             </ThemeProvider>
             <ThemeProvider theme={theme}>
-              <Button
+              <StyledButton
                 onClick={handleDeleteComment}
                 color="delete"
                 fontSize="small"
-                sx={{ margin: "0 5px" }}
               >
                 Delete
-              </Button>
+              </StyledButton>
             </ThemeProvider>
           </div>
         )}

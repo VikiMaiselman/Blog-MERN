@@ -16,11 +16,12 @@ import {
 } from "./StyledNavbar";
 
 export default function Navbar() {
+  /* context */
   const { isAuthenticated } = React.useContext(AuthContext);
+
+  /* hooks */
   const [isFixed, setIsFixed] = useState(false);
-
   const defineIfFixed = () => setIsFixed(window.scrollY >= 50);
-
   useEffect(() => {
     window.addEventListener("scroll", defineIfFixed);
     return () => window.removeEventListener("scroll", defineIfFixed);

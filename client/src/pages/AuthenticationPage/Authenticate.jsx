@@ -42,6 +42,7 @@ export default function Authenticate() {
     password: "",
   });
 
+  /* validation */
   const validate = (name, value) => {
     const newErrors = {};
 

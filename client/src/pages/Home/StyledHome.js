@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import { styled } from "@mui/system";
 
 export const StyledContainer = styled("div")({
@@ -81,5 +82,14 @@ export const CustomDate = styled("small")({
   "&::before": {
     content: `"${String.fromCharCode(8226)}"`,
     padding: "0 .5rem",
+  },
+});
+
+export const StyledButton = styled(Button)({
+  margin: "0 5px",
+  "@media (max-width: 670px)": {
+    width: "35px",
+    fontSize: "smaller",
+    padding: "2.5px 2.5px",
   },
 });

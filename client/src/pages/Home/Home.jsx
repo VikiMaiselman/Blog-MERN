@@ -15,6 +15,7 @@ import {
   Author,
   CustomDate,
   StyledParagraph,
+  StyledButton,
 } from "./StyledHome";
 import { CustomThemeContext } from "../../contexts/CustomTheme.context";
 import { ThemeProvider } from "@emotion/react";
@@ -64,7 +65,6 @@ export default function Home() {
 
       {isAuthenticated && (
         <Link to="/newpost">
-          {/* <SavingsOutlinedIcon sx={{ fontSize: "1rem", verticalAlign: "-2px" }} /> */}
           <Button color="secondary" fontSize="small" sx={{ margin: "0 5px" }}>
             &nbsp;Create New Post
           </Button>
@@ -99,27 +99,25 @@ export default function Home() {
                     {user?.id === post.user._id && (
                       <div>
                         <ThemeProvider theme={theme}>
-                          <Button
+                          <StyledButton
                             onClick={(e) => handleEdit(e, post)}
                             color="edit"
                             fontSize="small"
                             variant="outlined"
-                            sx={{ margin: "0 5px" }}
                           >
                             Edit
-                          </Button>
+                          </StyledButton>
                         </ThemeProvider>
 
                         <ThemeProvider theme={theme}>
-                          <Button
+                          <StyledButton
                             onClick={(e) => handleDelete(e, post._id)}
                             color="delete"
                             fontSize="small"
                             variant="outlined"
-                            sx={{ margin: "0 5px" }}
                           >
                             Delete
-                          </Button>
+                          </StyledButton>
                         </ThemeProvider>
                       </div>
                     )}

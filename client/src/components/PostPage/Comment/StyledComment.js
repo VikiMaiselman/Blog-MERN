@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Button } from "@mui/material";
 
 export const CommentContainer = styled("div")({
   width: "100%",
@@ -36,5 +37,14 @@ export const CustomDate = styled("small")({
   "&::before": {
     content: `"${String.fromCharCode(8226)}"`,
     padding: "0 .5rem",
+  },
+});
+
+export const StyledButton = styled(Button)({
+  margin: "0 5px",
+  "@media (max-width: 670px)": {
+    width: "35px",
+    fontSize: "0.75rem",
+    padding: "2.5px 2.5px",
   },
 });

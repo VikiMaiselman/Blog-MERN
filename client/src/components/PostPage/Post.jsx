@@ -22,6 +22,7 @@ import {
 } from "./StyledPost";
 import { ThemeProvider } from "@emotion/react";
 import { CustomThemeContext } from "../../contexts/CustomTheme.context";
+import { StyledButton } from "./Comment/StyledComment";
 
 export default function Post() {
   /* location & navigation */
@@ -83,7 +84,7 @@ export default function Post() {
           {user.id === post.user._id && (
             <div>
               <ThemeProvider theme={theme}>
-                <Button
+                <StyledButton
                   onClick={() => handleEditPost(post)}
                   color="edit"
                   fontSize="small"
@@ -91,11 +92,11 @@ export default function Post() {
                   sx={{ margin: "0 5px" }}
                 >
                   Edit Post
-                </Button>
+                </StyledButton>
               </ThemeProvider>
 
               <ThemeProvider theme={theme}>
-                <Button
+                <StyledButton
                   onClick={() => handleDeletePost(post._id)}
                   color="delete"
                   fontSize="small"
@@ -103,7 +104,7 @@ export default function Post() {
                   sx={{ margin: "0 5px" }}
                 >
                   Delete Post
-                </Button>
+                </StyledButton>
               </ThemeProvider>
             </div>
           )}
