@@ -20,6 +20,7 @@ export default function Navbar() {
   const { isAuthenticated } = React.useContext(AuthContext);
 
   /* hooks */
+  // eslint-disable-next-line no-unused-vars
   const [isFixed, setIsFixed] = useState(false);
   const defineIfFixed = () => setIsFixed(window.scrollY >= 50);
   useEffect(() => {
@@ -31,12 +32,12 @@ export default function Navbar() {
     <>
       <div>
         <img
-          src="winter-park.jpg"
+          src="paisaje-invernal.jpg"
           width={"100%"}
           height={"400"}
           style={{ objectFit: "cover" }}
         />
-        <NavbarImageTitle>Viki's Blog...</NavbarImageTitle>
+        <NavbarImageTitle>Viki&apos;s Blog...</NavbarImageTitle>
       </div>
       <StyledNavContainer>
         <StyledRegularLink className="Navbar-component">
