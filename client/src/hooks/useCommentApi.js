@@ -64,7 +64,7 @@ export default function useCommentApi() {
         { withCredentials: true },
         headers
       );
-      fetchComments(postId);
+      await fetchComments(postId);
     } catch (error) {
       console.error(error);
       Swal.fire({
@@ -79,13 +79,13 @@ export default function useCommentApi() {
 
   const deleteComment = async (commentId, postId) => {
     try {
-      const response = await axios.post(
+      await axios.post(
         `${url}/comment/del`,
         { commentId: commentId },
         { withCredentials: true },
         headers
       );
-      fetchComments(postId);
+      await fetchComments(postId);
     } catch (error) {
       console.error(error);
       Swal.fire({

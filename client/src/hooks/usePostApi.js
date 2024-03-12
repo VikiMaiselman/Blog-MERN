@@ -32,7 +32,7 @@ export default function usePostApi() {
         { withCredentials: true },
         headers
       );
-      fetchPosts();
+      await fetchPosts();
     } catch (error) {
       console.error(error);
       Swal.fire({
@@ -53,7 +53,7 @@ export default function usePostApi() {
         { withCredentials: true },
         headers
       );
-      fetchPosts();
+      await fetchPosts();
     } catch (error) {
       console.error(error);
       Swal.fire({
@@ -74,6 +74,7 @@ export default function usePostApi() {
         { withCredentials: true },
         headers
       );
+      await fetchPosts();
     } catch (error) {
       console.error(error);
       Swal.fire({
