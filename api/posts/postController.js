@@ -1,4 +1,4 @@
-import { Post } from "../adb_mongo/database.js";
+import { Post, Comment, db } from "../adb_mongo/database.js";
 
 export const getPosts = async (req, res) => {
   try {
@@ -43,7 +43,17 @@ export const updatePost = async (req, res) => {
 export const deletePost = async (req, res) => {
   const { postId } = req.body;
   try {
-    await Post.deleteOne({ _id: postId });
+    const session = await db.startSession();
+
+    try {
+      await session.withTransaction(async () => {
+        // Important:: You must pass the session to the operations
+        await Post.deleteOne({ _id: postId }, { session });
+        await Comment.deleteMany({ post: postId }, { session });
+      });
+    } finally {
+      await session.endSession();
+    }
     return res.status(200).json("Post successfully deleted");
   } catch (err) {
     res.status(400).json("Could not delete a post");
