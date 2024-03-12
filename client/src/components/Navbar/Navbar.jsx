@@ -36,7 +36,9 @@ export default function Navbar() {
           width={"100%"}
           height={"400"}
           style={{ objectFit: "cover" }}
+          alt='Photo by <a href="https://unsplash.com/@todd_diemer?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Todd Diemer</a> on <a href="https://unsplash.com/photos/snow-covered-house-67t2GJcD5PI?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>'
         />
+
         <NavbarImageTitle>Viki&apos;s Blog...</NavbarImageTitle>
       </div>
       <StyledNavContainer>
